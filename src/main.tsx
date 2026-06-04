@@ -15,7 +15,6 @@ fetch('/amplify_outputs.json')
   });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 );
+
