@@ -6,8 +6,12 @@ export const uploadToGlacier = defineFunction({
   timeoutSeconds: 900,
   runtime: 20,
   environment: {
-    CROSS_ACCOUNT_ROLE_ARN: '', // Set this in environment or via secrets
-    CROSS_ACCOUNT_BUCKET: '', // e.g., my-glacier-bucket
-    CROSS_ACCOUNT_REGION: 'us-east-1',
+    // Set these in Amplify Console → Environment variables
+    // Example: arn:aws:iam::123456789012:role/CrossAccountS3GlacierRole
+    CROSS_ACCOUNT_ROLE_ARN: process.env.CROSS_ACCOUNT_ROLE_ARN || '',
+    // Example: my-glacier-bucket
+    CROSS_ACCOUNT_BUCKET: process.env.CROSS_ACCOUNT_BUCKET || '',
+    // Example: us-east-1
+    CROSS_ACCOUNT_REGION: process.env.CROSS_ACCOUNT_REGION || 'us-east-1',
   },
 });
