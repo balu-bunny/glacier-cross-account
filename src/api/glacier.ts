@@ -67,16 +67,16 @@ export class GlacierAPI {
         throw new Error(response.errors[0].message);
       }
 
+      // Parse JSON strings from response
+      const foldersJson = response.data?.foldersJson || '[]';
+      const filesJson = response.data?.filesJson || '[]';
+      
+      const folders = JSON.parse(foldersJson) as string[];
+      const files = JSON.parse(filesJson) as FileInfo[];
+
       return {
-        folders: (response.data?.folders || []).filter((f): f is string => f !== null),
-        files: (response.data?.files || [])
-          .filter((f): f is NonNullable<typeof f> => f !== null)
-          .map(f => ({
-            key: f.key || '',
-            size: f.size || 0,
-            lastModified: f.lastModified || '',
-            storageClass: f.storageClass || 'STANDARD',
-          })),
+        folders,
+        files,
         bucket: response.data?.bucket || null,
       };
     } catch (error) {

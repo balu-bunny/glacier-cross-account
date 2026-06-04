@@ -102,8 +102,8 @@ export const handler: Schema['listCrossAccountFolders']['functionHandler'] = asy
     console.log(`Found ${folders.length} folders and ${files.length} files`);
 
     return {
-      folders,
-      files,
+      foldersJson: JSON.stringify(folders),
+      filesJson: JSON.stringify(files),
       bucket: crossAccountBucket,
     };
   } catch (error) {

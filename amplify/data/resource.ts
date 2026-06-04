@@ -4,10 +4,10 @@ import { listCrossAccountFolders } from '../functions/listCrossAccountFolders/re
 
 const schema = a.schema({
   FileInfo: a.customType({
-    key: a.string(),
-    size: a.integer(),
-    lastModified: a.string(),
-    storageClass: a.string(),
+    key: a.string().required(),
+    size: a.integer().required(),
+    lastModified: a.string().required(),
+    storageClass: a.string().required(),
   }),
 
   UploadResult: a.customType({
@@ -19,9 +19,9 @@ const schema = a.schema({
   }),
 
   ListResult: a.customType({
-    folders: a.string().array(),
-    files: a.ref('FileInfo').array(),
-    bucket: a.string(),
+    foldersJson: a.string().required(), // JSON string of string array
+    filesJson: a.string().required(),   // JSON string of FileInfo array
+    bucket: a.string().required(),
   }),
 
   uploadToGlacier: a
