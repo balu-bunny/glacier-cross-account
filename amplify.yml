@@ -4,14 +4,17 @@ backend:
     build:
       commands:
         - npm install --cache .npm --prefer-offline
+        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     preBuild:
       commands:
         - npm install --cache .npm --prefer-offline
+        - cp amplify_outputs.json public/ || echo "amplify_outputs.json not found, skipping copy"
     build:
       commands:
         - npm run build
+        - cp amplify_outputs.json dist/ || echo "amplify_outputs.json not found in dist"
   artifacts:
     baseDirectory: dist
     files:

@@ -5,13 +5,14 @@ import App from './App';
 import './index.css';
 
 // Load Amplify config (generated after deployment)
-try {
-  // @ts-ignore - File generated at build time by Amplify
-  const outputs = await import('../amplify_outputs.json');
-  Amplify.configure(outputs.default || outputs);
-} catch (e) {
-  console.warn('Amplify outputs not found. Run "npx ampx sandbox" first.');
-}
+fetch('/amplify_outputs.json')
+  .then((res) => res.json())
+  .then((config) => {
+    Amplify.configure(config);
+  })
+  .catch((e) => {
+    console.warn('Amplify outputs not found. Backend may not be deployed yet.');
+  });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
