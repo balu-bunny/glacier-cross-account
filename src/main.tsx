@@ -10,7 +10,7 @@ fetch('/amplify_outputs.json')
   .then((config) => {
     Amplify.configure(config);
   })
-  .catch((e) => {
+  .catch(() => {
     console.warn('Amplify outputs not found. Backend may not be deployed yet.');
   });
 
