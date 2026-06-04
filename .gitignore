@@ -4,7 +4,7 @@ amplify_outputs.json
 node_modules/
 
 # Dependencies
-package-lock.json
+# package-lock.json is needed for Amplify CI builds
 yarn.lock
 pnpm-lock.yaml
 
