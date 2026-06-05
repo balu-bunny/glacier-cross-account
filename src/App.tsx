@@ -14,7 +14,7 @@ export default function App() {
     setRefreshKey(prev => prev + 1);
   };
 
-  // Check if user already has a session before showing Authenticator
+  // Check if user already has a session
   useEffect(() => {
     getCurrentUser()
       .then(() => setHasSession(true))
@@ -30,22 +30,14 @@ export default function App() {
   // Show nothing while checking session
   if (isCheckingSession) return null;
 
-  // If session exists, skip Authenticator entirely to avoid "already signed in" error
-  if (hasSession) {
-    return (
-      <AppLayout onSignOut={handleSignOut}>
-        <FileUpload onUploadComplete={handleUploadComplete} />
-        <FolderBrowser key={refreshKey} />
-      </AppLayout>
-    );
-  }
-
+  // Always show Authenticator to allow sign-up, even when session exists
+  // Authenticator handles existing sessions appropriately
   return (
     <Authenticator
       loginMechanisms={['email']}
       signUpAttributes={['email']}
     >
-      {({ signOut }) => (
+      {({ signOut, user }) => (
         <AppLayout onSignOut={() => signOut?.()}>
           <FileUpload onUploadComplete={handleUploadComplete} />
           <FolderBrowser key={refreshKey} />
