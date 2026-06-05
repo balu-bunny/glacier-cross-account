@@ -5,6 +5,11 @@ import { FolderBrowser } from './components/FolderBrowser';
 import { useState, useEffect } from 'react';
 import { getCurrentUser } from 'aws-amplify/auth';
 
+type AppUser = {
+  username?: string;
+  attributes?: { email?: string };
+};
+
 export default function App() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [isCheckingSession, setIsCheckingSession] = useState(true);
@@ -44,14 +49,14 @@ export default function App() {
         ),
       }}
     >
-      {({ signOut, user }) => {
+      {({ signOut, user }: { signOut?: () => void; user?: AppUser }) => {
         const userEmail = user?.attributes?.email || user?.username || 'User';
         const userName = userEmail.includes('@') ? userEmail.split('@')[0] : userEmail;
         const userInitials = userName
           .split(/\s+/)
           .filter(Boolean)
           .slice(0, 2)
-          .map((part) => part[0].toUpperCase())
+          .map((part: string) => part[0].toUpperCase())
           .join('');
 
         return (
