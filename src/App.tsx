@@ -46,13 +46,16 @@ function AppLayout({ children, onSignOut }: { children: React.ReactNode; onSignO
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Glacier Cross-Account Storage
-              </h1>
-              <p className="text-sm text-gray-600 mt-1">
-                Upload files to cross-account S3 with Glacier storage class
-              </p>
+            <div className="flex items-center">
+              <img src="/Q.svg" alt="Logo" className="h-12 w-12 mr-4" />
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">
+                  Glacier Cross-Account Storage
+                </h1>
+                <p className="text-sm text-gray-600 mt-1">
+                  Upload files to cross-account S3 with Glacier storage class
+                </p>
+              </div>
             </div>
             <div className="text-right">
               <button
