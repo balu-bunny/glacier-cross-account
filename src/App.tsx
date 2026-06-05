@@ -28,6 +28,19 @@ export default function App() {
     <Authenticator
       loginMechanisms={['email']}
       signUpAttributes={['email']}
+      components={{
+        Header: () => (
+          <div className="flex flex-col items-center justify-center mb-6 px-4 text-center">
+            <img src="/Q.svg" alt="Qualityze Logo" className="h-20 w-20 mb-4" />
+            <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+              Cross-Account Storage
+            </h1>
+            <p className="mt-2 text-sm text-gray-600 max-w-xl">
+              Upload files to cross-account S3 with Glacier storage class
+            </p>
+          </div>
+        ),
+      }}
     >
       {({ signOut }) => (
         <AppLayout onSignOut={() => signOut?.()}>
@@ -47,7 +60,7 @@ function AppLayout({ children, onSignOut }: { children: React.ReactNode; onSignO
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
-              <img src="/Q.svg" alt="Logo" className="h-12 w-12 mr-4" />
+              <img src="/Q.svg" alt="Logo" className="h-16 w-16 mr-5" />
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">
                   Glacier Cross-Account Storage
