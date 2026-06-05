@@ -3,7 +3,7 @@ import '@aws-amplify/ui-react/styles.css';
 import { FileUpload } from './components/FileUpload';
 import { FolderBrowser } from './components/FolderBrowser';
 import { useState, useEffect } from 'react';
-import { getCurrentUser, signOut } from 'aws-amplify/auth';
+import { getCurrentUser } from 'aws-amplify/auth';
 
 export default function App() {
   const [refreshKey, setRefreshKey] = useState(0);
