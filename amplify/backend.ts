@@ -1,4 +1,5 @@
 import { defineBackend } from '@aws-amplify/backend';
+import { PolicyStatement, Effect } from 'aws-cdk-lib/aws-iam';
 import { auth } from './auth/resource';
 import { data } from './data/resource';
 import { listCrossAccountFolders } from './functions/listCrossAccountFolders/resource';
@@ -16,16 +17,16 @@ const crossAccountRoleArn = process.env.CROSS_ACCOUNT_ROLE_ARN || 'arn:aws:iam::
 
 // Add sts:AssumeRole permission to the listCrossAccountFolders function
 const listFunction = backend.listCrossAccountFolders.resources.lambda;
-listFunction.addToRolePolicy({
-  Effect: 'Allow',
-  Action: 'sts:AssumeRole',
-  Resource: crossAccountRoleArn,
-});
+listFunction.addToRolePolicy(new PolicyStatement({
+  effect: Effect.ALLOW,
+  actions: ['sts:AssumeRole'],
+  resources: [crossAccountRoleArn],
+}));
 
 // Add sts:AssumeRole permission to the uploadToGlacier function
 const uploadFunction = backend.uploadToGlacier.resources.lambda;
-uploadFunction.addToRolePolicy({
-  Effect: 'Allow',
-  Action: 'sts:AssumeRole',
-  Resource: crossAccountRoleArn,
-});
+uploadFunction.addToRolePolicy(new PolicyStatement({
+  effect: Effect.ALLOW,
+  actions: ['sts:AssumeRole'],
+  resources: [crossAccountRoleArn],
+}));
